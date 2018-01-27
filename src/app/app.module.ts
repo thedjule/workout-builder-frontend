@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
@@ -9,12 +10,12 @@ import { WorkoutsComponent } from './workouts/workouts.component';
 import { ExerciseDetailComponent } from './exercise-detail/exercise-detail.component';
 import { ExercisesComponent } from './exercises/exercises.component';
 import { MessagesComponent } from './messages/messages.component';
-import {UserService} from './user.service';
-import {WorkoutService} from './workout.service';
-import {ExerciseService} from './exercise.service';
+import { UserService } from './user.service';
+import { WorkoutService } from './workout.service';
+import { ExerciseService } from './exercise.service';
 import { UserSigninComponent } from './user-signin/user-signin.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
-import {AuthService} from './auth.service';
+import { AuthService } from './auth.service';
 import { AppRoutingModule } from './app-routing.module';
 
 
@@ -32,7 +33,9 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [UserService, WorkoutService, ExerciseService, AuthService],
   bootstrap: [AppComponent]
