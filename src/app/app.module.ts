@@ -14,7 +14,8 @@ import {WorkoutService} from './workout.service';
 import {ExerciseService} from './exercise.service';
 import { UserSigninComponent } from './user-signin/user-signin.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
-import {AuthService} from "./auth.service";
+import {AuthService} from './auth.service';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {AuthService} from "./auth.service";
     UserSignupComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [UserService, WorkoutService, ExerciseService, AuthService],
   bootstrap: [AppComponent]
