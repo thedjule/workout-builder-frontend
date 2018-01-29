@@ -7,16 +7,18 @@ import { WorkoutsComponent } from './workouts/workouts.component';
 import { WorkoutDetailComponent } from './workout-detail/workout-detail.component';
 import { ExercisesComponent } from './exercises/exercises.component';
 import { ExerciseDetailComponent } from './exercise-detail/exercise-detail.component';
+import { AuthGuardService } from './auth-guard.service';
 
 
 const routes: Routes = [
-  { path: 'user', component: UserDetailComponent },
+  { path: '',  redirectTo: '/workouts', pathMatch: 'full' },
+  { path: 'user', component: UserDetailComponent, canActivate: [AuthGuardService] },
   { path: 'signin', component: UserSigninComponent },
   { path: 'signup', component: UserSignupComponent },
-  { path: 'workouts', component: WorkoutsComponent },
-  { path: 'workout/:id', component: WorkoutDetailComponent },
-  { path: 'exercises', component: ExercisesComponent },
-  { path: 'exercise/:id', component: ExerciseDetailComponent }
+  { path: 'workouts', component: WorkoutsComponent, canActivate: [AuthGuardService] },
+  { path: 'workout/:id', component: WorkoutDetailComponent, canActivate: [AuthGuardService] },
+  { path: 'exercises', component: ExercisesComponent, canActivate: [AuthGuardService] },
+  { path: 'exercise/:id', component: ExerciseDetailComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({

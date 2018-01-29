@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
+import {Router} from '@angular/router';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -13,7 +14,7 @@ const httpOptions = {
 export class AuthService {
 
   public apiUrl = 'http://127.0.0.1:8000/api/';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   signup(name: string, email: string, password: string, passwordConfirmation: string) {
     return this.http.post(
@@ -31,12 +32,26 @@ export class AuthService {
           (response: Response) => {
             const token = response['data'].api_token;
             localStorage.setItem('token', token);
+            this.router.navigate(['/workouts']);
             return token;
           }
         );
   }
 
+  logout() {
+      this.router.navigate(['']);
+      this.deleteToken();
+  }
+
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  deleteToken() {
+      return localStorage.removeItem('token');
+  }
+
+  isAuthenticated() {
+      return this.getToken() != null;
   }
 }

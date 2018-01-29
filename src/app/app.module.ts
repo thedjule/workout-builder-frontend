@@ -17,6 +17,9 @@ import { UserSigninComponent } from './user-signin/user-signin.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
 import { AuthService } from './auth.service';
 import { AppRoutingModule } from './app-routing.module';
+import { HeaderComponent } from './header/header.component';
+import { DropdownDirective } from './dropdown.directive';
+import { AuthGuardService } from './auth-guard.service';
 
 
 @NgModule({
@@ -29,7 +32,9 @@ import { AppRoutingModule } from './app-routing.module';
     ExercisesComponent,
     MessagesComponent,
     UserSigninComponent,
-    UserSignupComponent
+    UserSignupComponent,
+    HeaderComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,7 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService, WorkoutService, ExerciseService, AuthService],
+  providers: [UserService, WorkoutService, ExerciseService, AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
