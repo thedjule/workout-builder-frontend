@@ -1,38 +1,58 @@
-<div class="row">
-  <div class="col-md-12">
-    <div class="row">
-      <div class="media" *ngFor="let exercise of exercises">
-        <img class="align-self-start mr-3" style="width: 220px;"
-             src="https://cdn-maf0.heartyhosting.com/sites/muscleandfitness.com/files/styles/263x263/public/studio/73/73_B.jpg?itok=4BbgYwH_"
-             alt="{{ exercise.name }}">
-        <div class="media-body">
-          <h3 class="mt-0">{{ exercise.name }}</h3>
-          <p><small><strong>Exercise type: </strong>{{ exercise.exerciseType.name }}</small></p>
-          <p>{{ exercise.description }}</p>
-          <p><small><strong>Muscle Groups:  </strong></small>
-            <span class="btn btn-light btn-sm" style="margin-right: 5px;" *ngFor="let muscle of exercise.muscleGroup">
-              {{ muscle.name }}
-            </span>
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Exercises
+      </h1>
+      <h2 class="subtitle">
+        A list of all exercises...
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns media" *ngFor="let exercise of exercises">
+    <div class="column is-one-third-desktop is-full-mobile is-half-tablet">
+      <div class="image">
+        <img src="https://greatist.com/sites/default/files/styles/article_main/public/CREATE-YOUR-OWN-WORKOUT_PUSH-UP_FEATURE.jpg?itok=qUIu5B_K">
+      </div>
+    </div>
+    <div class="column is-two-thirds-desktop is-full-mobile is-half-tablet">
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <span class="title is-capitalized">{{ exercise.name }}</span><br><small>Exercise type: {{ exercise.exerciseType.name }}</small>
+            <br>
+            {{ exercise.description }}
           </p>
+        </div>
+        <div class="level-left">
+          <span class="tag is-light" style="margin-right: 5px;" *ngFor="let muscle of exercise.muscleGroup">
+            {{ muscle.name }}
+          </span>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="btn-group" role="group" aria-label="Navigation" style="margin: 20px auto;">
-        <button class="btn btn-secondary btn-sm"
-                [disabled]="page==1"
-                (click)="onGetExercises(1)">First</button>
-        <button class="btn btn-secondary btn-sm"
-                [disabled]="page==1"
-                (click)="onGetExercises(page-1)">Previous</button>
-        <button class="btn btn-secondary btn-sm"><span class="badge badge-light">{{ page }}</span></button>
-        <button class="btn btn-secondary btn-sm"
-                [disabled]="page==lastPage"
-                (click)="onGetExercises(page+1)">Next</button>
-        <button class="btn btn-secondary btn-sm"
-                [disabled]="page==lastPage"
-                (click)="onGetExercises(lastPage)">Last <span class="badge badge-light">{{ lastPage }}</span></button>
-      </div>
-    </div>
   </div>
-</div>
+</section>
+
+<section class="section">
+<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+  <button class="pagination-previous"
+          [disabled]="page==1"
+          (click)="onGetExercises(1)">First page</button>
+  <button class="pagination-previous"
+     [disabled]="page==1"
+     (click)="onGetExercises(page-1)">Previous</button>
+  <button class="pagination-next"
+     [disabled]="page==lastPage"
+     (click)="onGetExercises(page+1)">Next page</button>
+  <button class="pagination-next"
+          [disabled]="page==lastPage"
+          (click)="onGetExercises(lastPage)">Last page</button>
+  <ul class="pagination-list">
+    <li>Page {{ page }} of {{ lastPage }}</li>
+  </ul>
+</nav>
+</section>

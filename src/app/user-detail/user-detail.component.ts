@@ -11,6 +11,7 @@ import {AuthService} from '../auth.service';
 })
 export class UserDetailComponent implements OnInit {
   @Input() user: User = new User();
+  gender = ['Male', 'Female'];
 
   constructor(private userService: UserService, private authService: AuthService) { }
 

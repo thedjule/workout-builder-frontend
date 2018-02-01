@@ -1,33 +1,54 @@
-<div class="row">
-  <div class="col-md-12">
+<div class="columns is-mobile is-centered">
+  <div class="column is-full-mobile is-half-tablet is-one-third-desktop">
+    <div class="content">
+      <h2>
+        User details
+      </h2>
+    </div>
     <form (submit)="onUpdateUser(f)" #f="ngForm">
-      <div class="row">
-        <div class="col-md-12 form-group">
-          <h3>User details:</h3>
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input" type="text" name="name" [(ngModel)]="user.name">
         </div>
-        <div class="col-md-12 form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" [(ngModel)]="user.name" class="form-control">
+      </div>
+      <div class="field">
+        <label class="label">Age</label>
+        <div class="control">
+          <input class="input" type="text" name="age" [(ngModel)]="user.age">
         </div>
-        <div class="col-md-12 form-group">
-          <label for="age">Age</label>
-          <input type="text" id="age" name="age" [(ngModel)]="user.age" class="form-control">
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <span class="select">
+            <select name="gender" [(ngModel)]="user.gender">
+              <option value="male" [selected]="user.gender == 'male'">Male</option>
+              <option value="female" [selected]="user.gender == 'female'">Female</option>
+            </select>
+          </span>
+          <span class="icon is-small is-left">
+            <i class="fa fa-venus-mars"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <label class="label">Height</label>
+        <div class="control">
+          <input class="input" type="text" name="height" [(ngModel)]="user.height">
         </div>
-        <div class="col-md-12 form-group">
-          <label for="gender">Gender</label>
-          <input type="text" id="gender" name="gender" [(ngModel)]="user.gender" class="form-control">
+      </div>
+      <div class="field">
+        <label class="label">Weight</label>
+        <div class="control">
+          <input class="input" type="text" name="weight" [(ngModel)]="user.weight">
         </div>
-        <div class="col-md-12 form-group">
-          <label for="height">Height</label>
-          <input type="text" id="height" name="height" [(ngModel)]="user.height" class="form-control">
-        </div>
-        <div class="col-md-12 form-group">
-          <label for="weight">Weight</label>
-          <input type="text" id="weight" name="weight" [(ngModel)]="user.weight" class="form-control">
-        </div>
-        <div class="col-md-12 form-group">
-          <button class="btn btn-success">Update</button>
-        </div>
+      </div>
+      <div class="field">
+        <p class="control">
+          <button class="button is-success">
+            Update
+          </button>
+        </p>
       </div>
     </form>
   </div>

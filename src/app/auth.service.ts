@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   logout() {
-      this.router.navigate(['']);
+      this.router.navigate(['signin']);
       this.deleteToken();
   }
 
