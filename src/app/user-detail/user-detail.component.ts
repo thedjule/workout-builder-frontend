@@ -12,6 +12,8 @@ import {AuthService} from '../auth.service';
 export class UserDetailComponent implements OnInit {
   @Input() user: User = new User();
   gender = ['Male', 'Female'];
+  errorShow = false;
+  errorMessage = '';
 
   constructor(private userService: UserService, private authService: AuthService) { }
 
@@ -34,7 +36,8 @@ export class UserDetailComponent implements OnInit {
     ).subscribe(
         response => console.log(response),
         error => {
-          console.log(error);
+          this.errorShow = true;
+          this.errorMessage = error.error.message + '<br>' + error.error.errors.name + '<br>';
           if (error['status'] === 401) {
             this.authService.deleteToken();
           }

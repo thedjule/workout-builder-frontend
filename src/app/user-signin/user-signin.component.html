@@ -8,24 +8,44 @@
         Sign in to your account and start building your favorite workout routines.
       </p>
     </div>
+    <div class="notification is-danger" [hidden]="errorShow === false">
+      <button class="delete" (click)="errorShow=false"></button>
+      <span [innerHtml]="errorMessage"></span>
+    </div>
     <form (submit)="onSignin(f)" #f="ngForm">
       <div class="field">
         <p class="control has-icons-left has-icons-right">
-          <input class="input" type="email" name="email" placeholder="Email" ngModel required>
+          <input [ngClass]="{'is-success': !email.invalid && (!email.dirty || email.touched),
+                              'is-danger': email.invalid && (email.dirty || email.touched)}"
+                 class="input" type="email" name="email" placeholder="Email"
+                 #email="ngModel" ngModel required email>
           <span class="icon is-small is-left">
             <i class="fa fa-envelope"></i>
           </span>
-          <span class="icon is-small is-right">
+          <span class="icon is-small is-right" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <i class="fa fa-exclamation-triangle" ></i>
+          </span>
+          <span class="icon is-small is-right" *ngIf="!email.invalid && (!email.dirty || email.touched)">
             <i class="fa fa-check"></i>
           </span>
+        </p>
+        <p class="help is-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+          <span *ngIf="email.errors.required">Email is required.</span>
+          <span *ngIf="email.errors.email">Email is not valid.</span>
         </p>
       </div>
       <div class="field">
         <p class="control has-icons-left">
-          <input class="input" type="password" name="password" placeholder="Password" ngModel required>
+          <input [ngClass]="{'is-success': !password.invalid && (!password.dirty || password.touched),
+                              'is-danger': password.invalid && (password.dirty || password.touched)}"
+                 class="input" type="password" name="password" placeholder="Password" minlength="8" #password="ngModel" ngModel required>
           <span class="icon is-small is-left">
             <i class="fa fa-lock"></i>
           </span>
+        </p>
+        <p class="help is-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+          <span *ngIf="password.errors.required">Password is required.</span>
+          <span *ngIf="password.errors.minlength">Password must be at least 8 characters long.</span>
         </p>
       </div>
       <div class="field">

@@ -5,17 +5,31 @@
         User details
       </h2>
     </div>
+    <div class="notification is-danger" [hidden]="errorShow === false">
+      <button class="delete" (click)="errorShow=false"></button>
+      <span [innerHtml]="errorMessage"></span>
+    </div>
     <form (submit)="onUpdateUser(f)" #f="ngForm">
       <div class="field">
         <label class="label">Name</label>
-        <div class="control">
-          <input class="input" type="text" name="name" [(ngModel)]="user.name">
+        <div class="control has-icons-left">
+          <input [ngClass]="{'is-success': !name.invalid && (!name.dirty || name.touched),
+                              'is-danger': name.invalid && (name.dirty || name.touched)}"
+                 class="input" type="text" name="name" placeholder="e.g Alex Smith"
+                 [(ngModel)]="user.name" #name="ngModel" minlength="3" required>
+          <span class="icon is-small is-left">
+            <i class="fa fa-user"></i>
+          </span>
+          <p class="help is-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+            <span *ngIf="name.errors.required">Name is required.</span>
+            <span *ngIf="name.errors.minlength">Name must be at least 3 characters long.</span>
+          </p>
         </div>
       </div>
       <div class="field">
         <label class="label">Age</label>
         <div class="control">
-          <input class="input" type="text" name="age" [(ngModel)]="user.age">
+          <input class="input" type="text" name="age" [(ngModel)]="user.age" placeholder="e.g 24">
         </div>
       </div>
       <div class="field">
@@ -34,18 +48,18 @@
       <div class="field">
         <label class="label">Height</label>
         <div class="control">
-          <input class="input" type="text" name="height" [(ngModel)]="user.height">
+          <input class="input" type="text" name="height" [(ngModel)]="user.height" placeholder="e.g 197">
         </div>
       </div>
       <div class="field">
         <label class="label">Weight</label>
         <div class="control">
-          <input class="input" type="text" name="weight" [(ngModel)]="user.weight">
+          <input class="input" type="text" name="weight" [(ngModel)]="user.weight" placeholder="e.g 94">
         </div>
       </div>
       <div class="field">
         <p class="control">
-          <button class="button is-success">
+          <button class="button is-success" [disabled]="!f.valid">
             Update
           </button>
         </p>

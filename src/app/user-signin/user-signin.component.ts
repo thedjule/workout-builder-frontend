@@ -8,7 +8,8 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./user-signin.component.css']
 })
 export class UserSigninComponent implements OnInit {
-
+  errorShow = false;
+  errorMessage = '';
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
@@ -19,7 +20,8 @@ export class UserSigninComponent implements OnInit {
         .subscribe(
             response => console.log(response),
             error => {
-              console.log(error);
+              this.errorShow = true;
+              this.errorMessage = error.error.message + '<br>' + error.error.errors.email + '<br>';
               if (error['status'] === 401) {
                 this.authService.deleteToken();
               }

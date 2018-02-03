@@ -8,44 +8,77 @@
         Create a Workout Builder account and start building your favorite workout routines.
       </p>
     </div>
+    <div class="notification is-danger" [hidden]="errorShow === false">
+      <button class="delete" (click)="errorShow=false"></button>
+      <span [innerHtml]="errorMessage"></span>
+    </div>
     <form (submit)="onSignup(f)" #f="ngForm">
       <div class="field">
         <label class="label">Name</label>
         <div class="control has-icons-left">
-          <input class="input" type="text" name="name" placeholder="e.g Alex Smith" ngModel required>
+          <input [ngClass]="{'is-success': !name.invalid && (!name.dirty || name.touched),
+                              'is-danger': name.invalid && (name.dirty || name.touched)}"
+                 class="input" type="text" name="name" placeholder="e.g Alex Smith"
+                 #name="ngModel" minlength="3" ngModel required>
           <span class="icon is-small is-left">
             <i class="fa fa-user"></i>
           </span>
+          <p class="help is-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+            <span *ngIf="name.errors.required">Name is required.</span>
+            <span *ngIf="name.errors.minlength">Name must be at least 3 characters long.</span>
+          </p>
         </div>
       </div>
       <div class="field">
         <label class="label">Email</label>
         <p class="control has-icons-left has-icons-right">
-          <input class="input" type="email" name="email" placeholder="e.g. alexsmith@gmail.com" ngModel required>
+          <input class="input" type="email" name="email" placeholder="e.g. alexsmith@gmail.com"
+                 #email="ngModel"ngModel required email>
           <span class="icon is-small is-left">
               <i class="fa fa-envelope"></i>
-            </span>
-          <span class="icon is-small is-right">
-              <i class="fa fa-check"></i>
-            </span>
+          </span>
+          <span class="icon is-small is-right" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <i class="fa fa-exclamation-triangle" ></i>
+          </span>
+          <span class="icon is-small is-right" *ngIf="!email.invalid && (!email.dirty || email.touched)">
+            <i class="fa fa-check"></i>
+          </span>
+        </p>
+        <p class="help is-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+          <span *ngIf="email.errors.required">Email is required.</span>
+          <span *ngIf="email.errors.email">Email is not valid.</span>
         </p>
       </div>
       <div class="field">
         <label class="label">Password</label>
         <p class="control has-icons-left">
-          <input class="input" type="password" name="password" placeholder="Password" ngModel required>
+          <input [ngClass]="{'is-success': !password.invalid && (!password.dirty || password.touched),
+                              'is-danger': password.invalid && (password.dirty || password.touched)}"
+                 class="input" type="password" name="password" placeholder="Password"
+                 minlength="8" #password="ngModel" ngModel required>
           <span class="icon is-small is-left">
               <i class="fa fa-lock"></i>
             </span>
+        </p>
+        <p class="help is-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+          <span *ngIf="password.errors.required">Password is required.</span>
+          <span *ngIf="password.errors.minlength">Password must be at least 8 characters long.</span>
         </p>
       </div>
       <div class="field">
         <label class="label">Password Confirmation</label>
         <p class="control has-icons-left">
-          <input class="input" type="password" name="passwordConfirmation" placeholder="Password Confirmation" ngModel required>
+          <input [ngClass]="{'is-success': !passwordConfirmation.invalid && (!passwordConfirmation.dirty || passwordConfirmation.touched),
+                              'is-danger': passwordConfirmation.invalid && (passwordConfirmation.dirty || passwordConfirmation.touched)}"
+                 class="input" type="password" name="passwordConfirmation" placeholder="Password Confirmation"
+                 minlength="8" #passwordConfirmation="ngModel" ngModel required>
           <span class="icon is-small is-left">
               <i class="fa fa-lock"></i>
             </span>
+        </p>
+        <p class="help is-danger" *ngIf="passwordConfirmation.invalid && (passwordConfirmation.dirty || passwordConfirmation.touched)">
+          <span *ngIf="passwordConfirmation.errors.required">Password Confirmation is required.</span>
+          <span *ngIf="passwordConfirmation.errors.minlength">Password Confirmation must be at least 8 characters long.</span>
         </p>
       </div>
       <div class="field">
