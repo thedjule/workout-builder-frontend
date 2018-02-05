@@ -11,7 +11,6 @@ import {AuthService} from '../auth.service';
 })
 export class UserDetailComponent implements OnInit {
   @Input() user: User = new User();
-  gender = ['Male', 'Female'];
   errorShow = false;
   errorMessage = '';
 

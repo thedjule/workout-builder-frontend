@@ -2,7 +2,7 @@
   <div class="container">
     <div class="navbar-brand">
       <a class="navbar-item" href="#">
-        <img src="http://www.srdjan.cc/workout-builder-logo.png" alt="Workout Builder" height="30">
+        <img src="http://www.srdjan.cc/flow-logo.png" alt="Workout Builder" height="30">
       </a>
       <div class="navbar-burger burger" data-target="navbarExampleTransparentExample"
            (click)="isActive = !isActive"
@@ -33,7 +33,7 @@
           <div class="navbar-item">
             <div class="field is-grouped">
               <p class="control">
-                <a class="button" routerLink="/signin">
+                <a class="button is-success" routerLink="/signin">
                 <span class="icon">
                   <i class="fa fa-sign-in"></i>
                 </span>
@@ -55,8 +55,8 @@
         </ng-template>
         <ng-template [ngIf]="authService.isAuthenticated()">
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link" href="/documentation/overview/start/">
-              Srdjan
+            <a class="navbar-link" href="#">
+              User details
             </a>
             <div class="navbar-dropdown is-boxed is-right">
               <a class="navbar-item" routerLink="/user">
