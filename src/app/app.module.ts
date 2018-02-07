@@ -20,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { DropdownDirective } from './dropdown.directive';
 import { AuthGuardService } from './auth-guard.service';
+import { FilterPipe } from './filter.pipe';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AuthGuardService } from './auth-guard.service';
     UserSigninComponent,
     UserSignupComponent,
     HeaderComponent,
-    DropdownDirective
+    DropdownDirective,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
