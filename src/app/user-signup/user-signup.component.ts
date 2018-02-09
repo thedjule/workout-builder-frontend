@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {AuthService} from '../auth.service';
+import { Router } from '@angular/router';
+import { MessagesService } from '../messages.service';
 
 @Component({
   selector: 'app-user-signup',
@@ -11,7 +13,7 @@ export class UserSignupComponent implements OnInit {
   errorShow = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router, private messagesService: MessagesService) { }
 
   ngOnInit() {
   }
@@ -19,7 +21,11 @@ export class UserSignupComponent implements OnInit {
   onSignup(form: NgForm) {
     this.authService.signup(form.value.name, form.value.email, form.value.password, form.value.passwordConfirmation)
         .subscribe(
-            response => console.log(response),
+            response => {
+                console.log(response);
+                this.router.navigate(['/signin']);
+                this.messagesService.add('Your Account has been successfully created. Login to your Account and enjoy.', 1);
+            },
             error => {
               this.errorShow = true;
               this.errorMessage = error.error.message +

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import {MessagesService} from '../messages.service';
 
 @Component({
   selector: 'app-user-signin',
@@ -10,7 +11,7 @@ import { AuthService } from '../auth.service';
 export class UserSigninComponent implements OnInit {
   errorShow = false;
   errorMessage = '';
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private messagesService: MessagesService) { }
 
   ngOnInit() {
   }
@@ -18,7 +19,10 @@ export class UserSigninComponent implements OnInit {
   onSignin(form: NgForm) {
     this.authService.signin(form.value.email, form.value.password)
         .subscribe(
-            response => console.log(response),
+            response => {
+                console.log(response);
+                this.messagesService.clear();
+            },
             error => {
               this.errorShow = true;
               this.errorMessage = error.error.message + '<br>' + error.error.errors.email + '<br>';

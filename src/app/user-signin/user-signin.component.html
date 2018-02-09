@@ -8,6 +8,7 @@
         Sign in to your account and start building your favorite workout routines.
       </p>
     </div>
+    <app-messages></app-messages>
     <div class="notification is-danger" [hidden]="errorShow === false">
       <button class="delete" (click)="errorShow=false"></button>
       <span [innerHtml]="errorMessage"></span>

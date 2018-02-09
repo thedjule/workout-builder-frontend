@@ -43,6 +43,7 @@ export class WorkoutDetailComponent implements OnInit {
             exercises => this.exercises = exercises['data'],
             error => console.log(error)
         );
+    this.messagesService.clear();
   }
 
   onSaveWorkout() {

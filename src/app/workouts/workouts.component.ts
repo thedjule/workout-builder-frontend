@@ -36,6 +36,7 @@ export class WorkoutsComponent implements OnInit {
         .subscribe(
           response => this.workouts = response['data']['workouts']
         );
+    this.messagesService.clear();
   }
 
   createWorkoutNewForm() {
