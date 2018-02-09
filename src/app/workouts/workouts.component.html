@@ -28,7 +28,7 @@
     </div>
   </div>
 </nav>
-
+<app-messages></app-messages>
 <!-- Workouts List -->
 <div class="container is-centered">
   <hr>
@@ -48,9 +48,9 @@
               </span>
               <span>Edit</span>
             </a>
-            <a class="button is-small" routerLink="/workout/{{ workout.id }}">
+            <a class="button is-small" routerLink="/workout/{{ workout.id }}" [ngClass]="{'is-light': !workout['exercises'].length}">
               <span class="icon is-small">
-                <i class="fa fa-list"></i>
+                <i class="fa fa-list" [ngClass]="{'fa-square-o': !workout['exercises'].length}"></i>
               </span>
               <span>Manage Exercises</span>
             </a>
@@ -147,7 +147,7 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success">Save Workout</button>
+        <button class="button is-success" [disabled]="!createWorkoutForm.valid">Save Workout</button>
         <button class="button" (click)="modalNewWorkout = !modalNewWorkout">Cancel</button>
       </footer>
     </form>
@@ -185,7 +185,7 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success">Update Workout</button>
+        <button class="button is-success" [disabled]="!updateWorkoutForm.valid">Update Workout</button>
         <button class="button" (click)="modalUpdateWorkout = !modalUpdateWorkout">Cancel</button>
       </footer>
     </form>

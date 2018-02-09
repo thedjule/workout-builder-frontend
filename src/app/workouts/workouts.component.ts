@@ -4,6 +4,7 @@ import { Workout } from '../workout';
 import { Exercise } from '../exercise';
 import { UserService } from '../user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MessagesService } from '../messages.service';
 
 @Component({
   selector: 'app-workouts',
@@ -23,7 +24,9 @@ export class WorkoutsComponent implements OnInit {
   constructor(
       private workoutService: WorkoutService,
       private userService: UserService,
-      private fb: FormBuilder) {
+      private fb: FormBuilder,
+      private messagesService: MessagesService
+  ) {
 
       this.createWorkoutNewForm();
   }
@@ -75,6 +78,7 @@ export class WorkoutsComponent implements OnInit {
               this.workouts.push(workout['data']);
               this.modalNewWorkout = !this.modalNewWorkout;
               this.createWorkoutForm.reset();
+              this.messagesService.add('Workout ' + workout['data'].name + ' successfully created.', 1);
             },
             error => console.log(error)
         );
@@ -109,7 +113,7 @@ export class WorkoutsComponent implements OnInit {
       // Send the updated Workout to the WorkoutService
       this.workoutService.updateWorkout(updatedWorkout)
           .subscribe(
-              workout => console.log(workout),
+              workout => this.messagesService.add('Workout ' + workout['data'].name + ' has been successfully updated.', 1),
               error => console.log(error)
           );
 
@@ -122,7 +126,7 @@ export class WorkoutsComponent implements OnInit {
   onDeleteWorkout(id: number, i: number) {
     this.workoutService.deleteWorkout(id)
         .subscribe(
-          response => console.log(response),
+          response => this.messagesService.add('Workout ' + response['data'].name + ' has been deleted.', 0),
           error => console.log(error)
         );
     this.workouts.splice(i, 1);

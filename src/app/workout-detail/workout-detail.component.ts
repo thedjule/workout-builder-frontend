@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Workout } from '../workout';
 import { Exercise } from '../exercise';
 import { ExerciseService } from '../exercise.service';
+import { MessagesService } from '../messages.service';
 
 @Component({
   selector: 'app-workout-detail',
@@ -17,10 +18,12 @@ export class WorkoutDetailComponent implements OnInit {
   exercises: Exercise[] = [];
   listLimit = 10;
   typeSelect = '';
+  workoutReset = false;
 
   constructor(
     private workoutService: WorkoutService,
     private exerciseService: ExerciseService,
+    private messagesService: MessagesService,
     private route: ActivatedRoute,
     private location: Location
   ) { }
@@ -58,7 +61,7 @@ export class WorkoutDetailComponent implements OnInit {
     // Send the updated Workout to the WorkoutService
     this.workoutService.updateWorkout(updatedWorkout)
         .subscribe(
-            workout => console.log(workout),
+            workout => this.messagesService.add('Workout Saved.', 1),
             error => console.log(error)
         );
   }
@@ -69,6 +72,7 @@ export class WorkoutDetailComponent implements OnInit {
             workout => {
               this.workout = workout['data'];
               this.userExercises = workout['data']['exercises'];
+              this.workoutReset = false;
             },
             error => console.log(error)
         );
@@ -76,10 +80,17 @@ export class WorkoutDetailComponent implements OnInit {
 
   onRemoveWorkout(index: number): void {
     this.userExercises.splice(index, 1);
+    this.workoutReset = true;
   }
 
   onAddExercise(exercise: Exercise): void {
     this.userExercises.push(exercise);
+    this.workoutReset = true;
+
+  }
+
+  goBack() {
+      this.location.back();
   }
 
   addToList() {

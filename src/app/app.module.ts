@@ -22,6 +22,7 @@ import { DropdownDirective } from './dropdown.directive';
 import { AuthGuardService } from './auth-guard.service';
 import { FilterPipe } from './filter.pipe';
 import { ExerciseTypePipe } from './exercise-type.pipe';
+import {MessagesService} from './messages.service';
 
 
 @NgModule({
@@ -47,7 +48,7 @@ import { ExerciseTypePipe } from './exercise-type.pipe';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [UserService, WorkoutService, ExerciseService, AuthService, AuthGuardService],
+  providers: [UserService, WorkoutService, ExerciseService, AuthService, AuthGuardService, MessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

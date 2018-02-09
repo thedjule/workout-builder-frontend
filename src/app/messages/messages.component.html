@@ -1,3 +1,6 @@
-<p>
-  messages works!
-</p>
+<div style="margin-bottom: 20px;" *ngIf="messagesService.show">
+  <div class="notification is-{{ messagesService.messageType }}">
+    <button class="delete" (click)="messagesService.clear()"></button>
+    <p>{{ messagesService.message }}</p>
+  </div>
+</div>
