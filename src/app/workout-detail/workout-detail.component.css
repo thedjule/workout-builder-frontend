@@ -1,0 +1,6 @@
+.workout-description {
+    display: none;
+}
+.is-active .workout-description {
+    display: inherit;
+}

@@ -17,14 +17,19 @@
     <div class="level-item">
       <div class="field has-addons">
         <p class="control">
-          <input class="input" type="text" placeholder="Find a workout" [(ngModel)]="searchText">
+          <input class="input" type="text" placeholder="Find a workout" [(ngModel)]="searchText" #search="ngModel">
+        </p>
+        <p class="control" *ngIf="search.value">
+          <button class="button is-text" (click)="searchText=''">
+            Clear
+          </button>
         </p>
       </div>
     </div>
   </div>
 </nav>
 
-<!-- Workouts List with Exercises -->
+<!-- Workouts List -->
 <div class="container is-centered">
   <hr>
   <div class="box" *ngFor="let workout of workouts | filter : searchText; index as i">
@@ -43,7 +48,7 @@
               </span>
               <span>Edit</span>
             </a>
-            <a class="button is-small">
+            <a class="button is-small" routerLink="/workout/{{ workout.id }}">
               <span class="icon is-small">
                 <i class="fa fa-list"></i>
               </span>

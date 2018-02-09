@@ -19,4 +19,8 @@ export class ExerciseService {
   getExercises(page: number) {
     return this.http.get(this.authService.apiUrl + 'exercises/?page=' + page, this.httpOptions);
   }
+
+  getAllExercises() {
+    return this.http.get(this.authService.apiUrl + 'exercises/all', this.httpOptions);
+  }
 }

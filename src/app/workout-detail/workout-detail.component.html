@@ -1,3 +1,138 @@
-<p>
-  workout-detail works!
-</p>
+<div class="columns">
+  <div class="column">
+    <nav class="level box">
+      <!-- Left side -->
+      <div class="level-left">
+        <p class="level-item"><a class="button is-success" (click)="onSaveWorkout()">
+          <span class="icon">
+            <i class="fa fa-edit"></i>
+          </span>
+          <span>Save Workout</span></a>
+        </p>
+        <p class="level-item"><a class="button is-text" (click)="onResetWorkout(workout.id)">Reset Workout</a></p>
+      </div>
+      <!-- Right side -->
+      <div class="level-right">
+        {{ userExercises.length }} exercises
+      </div>
+    </nav>
+
+    <p><strong>{{ workout.name }}</strong></p>
+    <p appDropdown>
+      <a>
+        <span><small>Show notes</small></span>
+        <span class="icon is-small">
+          <i class="fa fa-angle-down"></i>
+        </span>
+      </a>
+      <span class="workout-description">
+        {{ workout.notes }}
+      </span>
+    </p>
+    <p><br></p>
+    <div class="box" *ngFor="let exercise of userExercises; index as i">
+      <article class="media">
+        <div class="media-left">
+          <figure class="image is-64x64">
+            <img src="https://greatist.com/sites/default/files/styles/article_main/public/CREATE-YOUR-OWN-WORKOUT_PUSH-UP_FEATURE.jpg?itok=qUIu5B_K" alt="Image">
+          </figure>
+        </div>
+        <div class="media-content">
+          <div class="content">
+            <div><span class="is-small"><small>({{ exercise.exerciseType.name }})</small></span> <span class="is-capitalized"><strong>{{ exercise.name }}</strong></span></div>
+            <div appDropdown>
+              <a>
+                <span><small>Show description</small></span>
+                <span class="icon is-small">
+                  <i class="fa fa-angle-down"></i>
+                </span>
+              </a>
+              <p class="workout-description">
+                <small>{{ exercise.description }}</small>
+              </p>
+              <div class="workout-description">
+                <span class="tag is-light" style="margin-right: 5px;" *ngFor="let muscle of exercise.muscleGroup">
+                  <small>{{ muscle.name }}</small>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="media-right">
+          <button class="delete" (click)="onRemoveWorkout(i)"></button>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div class="column">
+    <!-- Main container -->
+    <nav class="level box">
+      <!-- Left side -->
+      <div class="level-left">
+        <div class="level-item">
+          <div class="field has-addons">
+            <p class="control">
+              <input class="input" type="text" placeholder="Find an exercise" [(ngModel)]="searchText">
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Right side -->
+      <div class="level-right">
+        <div class="field">
+          <div class="control has-icons-left">
+            <div class="select is-info">
+              <select [(ngModel)]="typeSelect">
+                <option value="" selected>Show all</option>
+                <option value="strength">Strength</option>
+                <option value="flexibility">Flexibility</option>
+                <option value="cardio">Cardio</option>
+              </select>
+            </div>
+            <span class="icon is-small is-left">
+              <i class="fa fa-bars"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="columns media" *ngFor="let exercise of exercises | exerciseType: searchText : typeSelect | slice:0:listLimit">
+      <div class="column is-one-quarter-desktop is-full-mobile is-half-tablet">
+        <div class="image">
+          <img src="https://greatist.com/sites/default/files/styles/article_main/public/CREATE-YOUR-OWN-WORKOUT_PUSH-UP_FEATURE.jpg?itok=qUIu5B_K">
+        </div>
+      </div>
+      <div class="column is-three-quarters-desktop is-full-mobile is-half-tablet">
+        <div class="media-content">
+          <div class="content">
+            <div>
+              <a class="button is-success is-small" (click)="onAddExercise(exercise)">Add Exercise</a> <span class="is-capitalized"><strong>{{ exercise.name }}</strong></span><br><small><strong>Exercise type:</strong> {{ exercise.exerciseType.name }}</small>
+            </div>
+            <div appDropdown>
+              <a>
+                <span><small>Show description</small></span>
+                <span class="icon is-small">
+                    <i class="fa fa-angle-down"></i>
+                  </span>
+              </a>
+              <span class="workout-description">
+                  <small>{{ exercise.description }}</small>
+                </span>
+            </div>
+          </div>
+          <div>
+                <span class="tag is-light" style="margin-right: 5px;" *ngFor="let muscle of exercise.muscleGroup">
+                  <small>{{ muscle.name }}</small>
+                </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="button is-info" (click)="addToList()">
+      <span class="icon">
+        <i class="fa fa-chevron-circle-down"></i>
+      </span>
+      <span>Show more</span>
+    </button>
+  </div>
+</div>

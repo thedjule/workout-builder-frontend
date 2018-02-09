@@ -21,6 +21,7 @@ import { HeaderComponent } from './header/header.component';
 import { DropdownDirective } from './dropdown.directive';
 import { AuthGuardService } from './auth-guard.service';
 import { FilterPipe } from './filter.pipe';
+import { ExerciseTypePipe } from './exercise-type.pipe';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { FilterPipe } from './filter.pipe';
     UserSignupComponent,
     HeaderComponent,
     DropdownDirective,
-    FilterPipe
+    FilterPipe,
+    ExerciseTypePipe
   ],
   imports: [
     BrowserModule,
