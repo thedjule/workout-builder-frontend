@@ -5,6 +5,7 @@
         User details
       </h2>
     </div>
+    <app-messages></app-messages>
     <div class="notification is-danger" [hidden]="errorShow === false">
       <button class="delete" (click)="errorShow=false"></button>
       <span [innerHtml]="errorMessage"></span>

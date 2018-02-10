@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
 import { NgForm } from '@angular/forms';
-import {AuthService} from '../auth.service';
+import { AuthService } from '../auth.service';
+import {MessagesService} from '../messages.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -14,7 +15,10 @@ export class UserDetailComponent implements OnInit {
   errorShow = false;
   errorMessage = '';
 
-  constructor(private userService: UserService, private authService: AuthService) { }
+  constructor(private userService: UserService,
+              private authService: AuthService,
+              private messagesService: MessagesService
+  ) { }
 
   ngOnInit() {
     this.userService.getUser()
@@ -33,7 +37,7 @@ export class UserDetailComponent implements OnInit {
         form.value.height,
         form.value.weight
     ).subscribe(
-        response => console.log(response),
+        response => this.messagesService.add('User successfully updated', 1),
         error => {
           this.errorShow = true;
           this.errorMessage = error.error.message + '<br>' + error.error.errors.name + '<br>';

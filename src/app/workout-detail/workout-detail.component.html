@@ -53,7 +53,7 @@
           </div>
           <div class="media-left">
             <figure class="image is-64x64">
-              <img src="https://greatist.com/sites/default/files/styles/article_main/public/CREATE-YOUR-OWN-WORKOUT_PUSH-UP_FEATURE.jpg?itok=qUIu5B_K" alt="Image">
+              <img src="{{ exercise.video }}" alt="Image">
             </figure>
           </div>
           <div class="media-content">
@@ -126,7 +126,7 @@
     <div class="media" *ngFor="let exercise of exercises | exerciseType: searchText : typeSelect | slice:0:listLimit">
         <div class="media-left">
           <figure class="image" style="width:170px;">
-            <img src="https://greatist.com/sites/default/files/styles/article_main/public/CREATE-YOUR-OWN-WORKOUT_PUSH-UP_FEATURE.jpg?itok=qUIu5B_K" alt="Image">
+            <img src="{{ exercise.video }}" alt="Image">
           </figure>
         </div>
         <div class="media-content">
