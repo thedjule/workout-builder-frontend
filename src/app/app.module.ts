@@ -22,7 +22,8 @@ import { DropdownDirective } from './dropdown.directive';
 import { AuthGuardService } from './auth-guard.service';
 import { FilterPipe } from './filter.pipe';
 import { ExerciseTypePipe } from './exercise-type.pipe';
-import {MessagesService} from './messages.service';
+import { MessagesService } from './messages.service';
+import { DndModule } from 'ng2-dnd';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import {MessagesService} from './messages.service';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DndModule.forRoot()
   ],
   providers: [UserService, WorkoutService, ExerciseService, AuthService, AuthGuardService, MessagesService],
   bootstrap: [AppComponent]

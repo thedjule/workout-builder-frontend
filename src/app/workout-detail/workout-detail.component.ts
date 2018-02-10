@@ -87,7 +87,6 @@ export class WorkoutDetailComponent implements OnInit {
   onAddExercise(exercise: Exercise): void {
     this.userExercises.push(exercise);
     this.workoutReset = true;
-
   }
 
   goBack() {
@@ -95,10 +94,11 @@ export class WorkoutDetailComponent implements OnInit {
   }
 
   addToList() {
-    // if (this.exercises.length - 10 < this.listLimit) {
-    //   this.listLimit += this.exercises.length - this.listLimit;
-    // } else {
       this.listLimit += 10;
-    // }
+  }
+
+  onMove(exercise: Exercise, position: number) {
+      this.userExercises.splice(position, 1, exercise);
+      this.workoutReset = true;
   }
 }

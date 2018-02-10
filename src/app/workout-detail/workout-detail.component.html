@@ -39,41 +39,52 @@
       </span>
     </p>
     <p><br></p>
-    <div class="box" *ngFor="let exercise of userExercises; index as i">
-      <article class="media">
-        <div class="media-left">
-          <figure class="image is-64x64">
-            <img src="https://greatist.com/sites/default/files/styles/article_main/public/CREATE-YOUR-OWN-WORKOUT_PUSH-UP_FEATURE.jpg?itok=qUIu5B_K" alt="Image">
-          </figure>
-        </div>
-        <div class="media-content">
-          <div class="content">
-            <div>
-              <span class="is-small"><small>({{ exercise.exerciseType.name }})</small></span>
-              <span class="is-capitalized"><strong>{{ exercise.name }}</strong></span></div>
-            <div appDropdown>
-              <a>
-                <span><small>Show description</small></span>
-                <span class="icon is-small">
-                  <i class="fa fa-angle-down"></i>
-                </span>
-              </a>
-              <p class="workout-description">
-                <small>{{ exercise.description }}</small>
-              </p>
-              <div class="workout-description">
-                <span class="tag is-light" style="margin-right: 5px;" *ngFor="let muscle of exercise.muscleGroup">
-                  <small>{{ muscle.name }}</small>
-                </span>
+    <ul dnd-sortable-container [sortableData]="userExercises">
+      <li class="box" *ngFor="let exercise of userExercises; index as i" dnd-sortable [sortableIndex]="i"
+          [dragData]="exercise" (onDropSuccess)="onMove($event, i)" >
+        <article class="media">
+          <div class="media-left">
+            <span class="">
+              <span>{{ i + 1 }}</span>
+              <span class="icon">
+                <i class="fa fa-bars"></i>
+              </span>
+            </span>
+          </div>
+          <div class="media-left">
+            <figure class="image is-64x64">
+              <img src="https://greatist.com/sites/default/files/styles/article_main/public/CREATE-YOUR-OWN-WORKOUT_PUSH-UP_FEATURE.jpg?itok=qUIu5B_K" alt="Image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <div class="content">
+              <div>
+                <span class="is-small"><small>({{ exercise.exerciseType.name }})</small></span>
+                <span class="is-capitalized"><strong>{{ exercise.name }}</strong></span></div>
+              <div appDropdown>
+                <a>
+                  <span><small>Show description</small></span>
+                  <span class="icon is-small">
+                    <i class="fa fa-angle-down"></i>
+                  </span>
+                </a>
+                <p class="workout-description">
+                  <small>{{ exercise.description }}</small>
+                </p>
+                <div class="workout-description">
+                  <span class="tag is-light" style="margin-right: 5px;" *ngFor="let muscle of exercise.muscleGroup">
+                    <small>{{ muscle.name }}</small>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="media-right">
-          <button class="delete" (click)="onRemoveWorkout(i)"></button>
-        </div>
-      </article>
-    </div>
+          <div class="media-right">
+            <button class="delete" (click)="onRemoveWorkout(i)"></button>
+          </div>
+        </article>
+      </li>
+    </ul>
   </div>
   <div class="column">
     <!-- Main container -->
