@@ -20,6 +20,7 @@ export class WorkoutsComponent implements OnInit {
   workoutIndex = -1;
   createWorkoutForm: FormGroup;
   updateWorkoutForm: FormGroup;
+  searchText = '';
 
   constructor(
       private workoutService: WorkoutService,

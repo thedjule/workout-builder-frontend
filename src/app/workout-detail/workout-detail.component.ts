@@ -18,6 +18,7 @@ export class WorkoutDetailComponent implements OnInit {
   exercises: Exercise[] = [];
   listLimit = 10;
   typeSelect = '';
+  searchText = '';
   workoutReset = false;
 
   constructor(
