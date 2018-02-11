@@ -20,6 +20,7 @@ export class WorkoutDetailComponent implements OnInit {
   typeSelect = '';
   searchText = '';
   workoutReset = false;
+  isLoading = false;
 
   constructor(
     private workoutService: WorkoutService,
@@ -30,6 +31,7 @@ export class WorkoutDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isLoading = true;
     const id = +this.route.snapshot.paramMap.get('id');
     this.workoutService.getWorkout(id)
         .subscribe(
@@ -41,13 +43,17 @@ export class WorkoutDetailComponent implements OnInit {
         );
     this.exerciseService.getAllExercises()
         .subscribe(
-            exercises => this.exercises = exercises['data'],
+            exercises => {
+                this.isLoading = false;
+                this.exercises = exercises['data'];
+            },
             error => console.log(error)
         );
     this.messagesService.clear();
   }
 
   onSaveWorkout() {
+    this.isLoading = true;
     // Create an array of exercises
     const exercisesArray = [];
     for (const exercise of this.userExercises) {
@@ -63,18 +69,23 @@ export class WorkoutDetailComponent implements OnInit {
     // Send the updated Workout to the WorkoutService
     this.workoutService.updateWorkout(updatedWorkout)
         .subscribe(
-            workout => this.messagesService.add('Workout Saved.', 1),
+            workout => {
+                this.messagesService.add('Workout Saved.', 1);
+                this.isLoading = false;
+            },
             error => console.log(error)
         );
   }
 
   onResetWorkout(id: number) {
+    this.isLoading = true;
     this.workoutService.getWorkout(id)
         .subscribe(
             workout => {
               this.workout = workout['data'];
               this.userExercises = workout['data']['exercises'];
               this.workoutReset = false;
+              this.isLoading = false;
             },
             error => console.log(error)
         );

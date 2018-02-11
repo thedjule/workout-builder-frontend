@@ -9,44 +9,26 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./exercises.component.css']
 })
 export class ExercisesComponent implements OnInit {
-  page = 0;
-  lastPage = 1;
   exercises: Exercise[];
+  listLimit = 10;
+  isLoading = false;
 
   constructor(private exercisesService: ExerciseService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.exercisesService.getExercises(this.page)
+    this.isLoading = true;
+    this.exercisesService.getAllExercises()
         .subscribe(
             response => {
-              this.exercises = response['data'];
-              this.page = response['meta'].current_page;
-              this.lastPage = response['meta'].last_page;
+                this.exercises = response['data'];
+                this.isLoading = false;
             },
-            error => {
-                console.log(error);
-                if (error['status'] === 401) {
-                    this.authService.deleteToken();
-                }
-            }
+                    error => console.log(error)
         );
   }
 
-  onGetExercises(page: number) {
-    this.page = page;
-    this.exercisesService.getExercises(this.page)
-        .subscribe(
-            response => {
-              this.exercises = response['data'];
-              this.page = response['meta'].current_page;
-              this.lastPage = response['meta'].last_page;
-            },
-            error => {
-                console.log(error);
-                if (error['status'] === 401) {
-                    this.authService.deleteToken();
-                }
-            }
-        );
+  addToList() {
+      this.listLimit += 10;
   }
+
 }

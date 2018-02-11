@@ -12,7 +12,7 @@
 </section>
 
 <section class="section">
-  <div class="columns media" *ngFor="let exercise of exercises">
+  <div class="columns media" *ngFor="let exercise of exercises | slice:0:listLimit">
     <div class="column is-one-third-desktop is-full-mobile is-half-tablet">
       <div class="image">
         <img src="{{ exercise.video }}">
@@ -35,24 +35,13 @@
       </div>
     </div>
   </div>
-</section>
-
-<section class="section">
-<nav class="pagination is-centered" role="navigation" aria-label="pagination">
-  <button class="pagination-previous"
-          [disabled]="page==1"
-          (click)="onGetExercises(1)">First page</button>
-  <button class="pagination-previous"
-     [disabled]="page==1"
-     (click)="onGetExercises(page-1)">Previous</button>
-  <button class="pagination-next"
-     [disabled]="page==lastPage"
-     (click)="onGetExercises(page+1)">Next page</button>
-  <button class="pagination-next"
-          [disabled]="page==lastPage"
-          (click)="onGetExercises(lastPage)">Last page</button>
-  <ul class="pagination-list">
-    <li>Page {{ page }} of {{ lastPage }}</li>
-  </ul>
-</nav>
+  <hr>
+  <div class="buttons has-addons is-centered">
+    <button class="button is-info" (click)="addToList()" [ngClass]="{'is-loading': isLoading}">
+        <span class="icon">
+          <i class="fa fa-chevron-circle-down"></i>
+        </span>
+      <span>Show more</span>
+    </button>
+  </div>
 </section>

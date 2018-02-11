@@ -9,7 +9,7 @@
           </span>
           <span>Back</span></a>
         </p>
-        <p class="level-item"><a class="button is-success" (click)="onSaveWorkout()">
+        <p class="level-item"><a class="button is-success" (click)="onSaveWorkout()" [ngClass]="{'is-loading': isLoading}">
           <span class="icon">
             <i class="fa fa-edit"></i>
           </span>
@@ -17,7 +17,7 @@
         </p>
         <p class="level-item"><button class="button is-text"
           (click)="onResetWorkout(workout.id)"
-          [disabled]="!workoutReset">Reset Workout</button></p>
+          [disabled]="!workoutReset || isLoading">Reset Workout</button></p>
       </div>
       <!-- Right side -->
       <div class="level-right">
@@ -155,8 +155,9 @@
           </div>
         </div>
     </div>
-    <div><hr>
-      <button class="button is-info" (click)="addToList()">
+    <hr>
+    <div class="buttons has-addons is-centered">
+      <button class="button is-info" (click)="addToList()" [ngClass]="{'is-loading': isLoading}">
         <span class="icon">
           <i class="fa fa-chevron-circle-down"></i>
         </span>

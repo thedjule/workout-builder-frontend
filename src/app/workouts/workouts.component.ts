@@ -21,6 +21,7 @@ export class WorkoutsComponent implements OnInit {
   createWorkoutForm: FormGroup;
   updateWorkoutForm: FormGroup;
   searchText = '';
+  isLoading = false;
 
   constructor(
       private workoutService: WorkoutService,
@@ -28,14 +29,18 @@ export class WorkoutsComponent implements OnInit {
       private fb: FormBuilder,
       private messagesService: MessagesService
   ) {
-
       this.createWorkoutNewForm();
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.userService.getUser()
         .subscribe(
-          response => this.workouts = response['data']['workouts']
+          response => {
+              this.isLoading = false;
+              this.workouts = response['data']['workouts'];
+          },
+            error => console.log(error)
         );
     this.messagesService.clear();
   }
