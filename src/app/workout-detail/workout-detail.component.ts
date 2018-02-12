@@ -54,6 +54,7 @@ export class WorkoutDetailComponent implements OnInit {
 
   onSaveWorkout() {
     this.isLoading = true;
+    this.workoutReset = false;
     // Create an array of exercises
     const exercisesArray = [];
     for (const exercise of this.userExercises) {

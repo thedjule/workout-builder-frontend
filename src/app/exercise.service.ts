@@ -6,21 +6,14 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ExerciseService {
 
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.authService.getToken()
-    })
-  };
-
   constructor(private authService: AuthService, private http: HttpClient) { }
 
-  getExercises(page: number) {
-    return this.http.get(this.authService.apiUrl + 'exercises/?page=' + page, this.httpOptions);
-  }
-
   getAllExercises() {
-    return this.http.get(this.authService.apiUrl + 'exercises/all', this.httpOptions);
+    return this.http.get(this.authService.apiUrl + 'exercises',
+        {headers: new HttpHeaders({
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.authService.getToken()
+        })});
   }
 }

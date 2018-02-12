@@ -20,15 +20,11 @@ export class UserSigninComponent implements OnInit {
     this.authService.signin(form.value.email, form.value.password)
         .subscribe(
             response => {
-                console.log(response);
                 this.messagesService.clear();
             },
             error => {
               this.errorShow = true;
               this.errorMessage = error.error.message + '<br>' + error.error.errors.email + '<br>';
-              if (error['status'] === 401) {
-                this.authService.deleteToken();
-              }
             }
         );
   }

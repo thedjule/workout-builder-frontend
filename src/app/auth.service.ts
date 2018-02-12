@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -13,7 +13,7 @@ const httpOptions = {
 @Injectable()
 export class AuthService {
 
-  public apiUrl = 'http://127.0.0.1:8000/api/';
+  public apiUrl = 'http://flow.srdjan.cc/api/';
   constructor(private http: HttpClient, private router: Router) { }
 
   signup(name: string, email: string, password: string, passwordConfirmation: string) {
@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   logout() {
-      this.router.navigate(['signin']);
+      this.router.navigate(['/signin']);
       this.deleteToken();
   }
 
